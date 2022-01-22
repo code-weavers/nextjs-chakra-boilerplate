@@ -1,16 +1,18 @@
 import { Input } from '../atoms/input';
 import { Button } from '../atoms/button';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { useCallback } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema } from '../../schemas/signIn';
 import { useUserContext } from '../../hooks/useUserContext';
 import { SignInParams } from '../../context/userContext';
 import { useFormResolver } from '../../hooks/useFormResolver';
+import { useToast } from '../../hooks/useToast';
+import { FormControl } from '@chakra-ui/react';
 
 export const SignForm = () => {
   const { signIn } = useUserContext();
+  const { openToast } = useToast();
 
   const {
     register,
@@ -20,13 +22,21 @@ export const SignForm = () => {
 
   const onSubmit: SubmitHandler<SignInParams> = useCallback(
     async (data) => {
+      openToast();
       await signIn(data);
     },
-    [signIn]
+    [signIn, openToast]
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col gap-4'}>
+    <FormControl
+      minW={'sm'}
+      w={'fit-content'}
+      display={'flex'}
+      flexDirection={'column'}
+      gap={3}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Input type={'email'} label={'E-mail'} errors={errors.email} register={register('email')} />
 
       <Input
@@ -36,9 +46,9 @@ export const SignForm = () => {
         register={register('password')}
       />
 
-      <div>
-        <Button type={'submit'}>Cadastrar</Button>
-      </div>
-    </form>
+      <Button buttonProps={{ w: 'fit-content' }} type={'submit'}>
+        Cadastrar
+      </Button>
+    </FormControl>
   );
 };

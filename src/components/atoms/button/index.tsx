@@ -1,26 +1,15 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps, useMemo } from 'react';
-import styles from './index.module.css';
+import { Button as ChakraButton, ButtonProps as ChakraButtonProps } from '@chakra-ui/react';
 
 interface ButtonProps {
   type?: 'submit';
+  buttonProps?: ChakraButtonProps;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children, type }) => {
-  const classes = useMemo(() => {
-    return [styles.button, styles.primaryButton].join(' ');
-  }, []);
-
+export const Button: React.FC<ButtonProps> = ({ children, type, buttonProps }) => {
   return (
-    <button type={type} className={classes}>
+    <ChakraButton type={type} {...buttonProps}>
       {children}
-    </button>
+    </ChakraButton>
   );
-};
-
-export const SecondaryButton: React.FC = ({ children }) => {
-  const classes = useMemo(() => {
-    return [styles.button, styles.secondaryButton].join(' ');
-  }, []);
-
-  return <button className={classes}>{children}</button>;
 };

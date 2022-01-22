@@ -16,7 +16,6 @@
  width: 100%;
  margin-right: 8px;
  background-color: #F3F3F4;
-
 }
 
-.defaultInput:hover { box-shadow: 0 0 0 4px rgba(234,76,137,0.1);}
+.defaultInput:hover { box-shadow: 0 0 0 4px rgba(234,76,137,0.1); background: white}

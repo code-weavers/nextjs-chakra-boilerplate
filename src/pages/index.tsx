@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { Button, SecondaryButton } from '../components/atoms/button';
+import { Button } from '../components/atoms/button';
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +12,7 @@ const Home: NextPage = () => {
         <div className='container m-8 flex md:mx-auto lg:mx-auto flex-col z-10'>
           <nav className='flex items-center justify-between'>
             <span className='text-white text-2xl font-bold '>Girabel</span>
-            <SecondaryButton>Sign In</SecondaryButton>
+            <Button>Sign In</Button>
           </nav>
 
           <div className='my-auto'>
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
 
             <div className='flex flex-col md:flex-row lg:flex-row justify-center items-center mt-8 space-y-4 md:space-y-0 lg:space-y-0 md:space-x-4 lg:space-x-4 animate-fade-in-down animation-delay-200'>
               <Button>Try for free</Button>
-              <SecondaryButton>Learn more</SecondaryButton>
+              <Button>Learn more</Button>
             </div>
           </div>
         </div>
