@@ -1,16 +1,15 @@
-import { Input } from '../atoms/input';
-import { Button } from '../atoms/button';
-
+import { Input } from '../../atoms/input';
+import { Button } from '../../atoms/button';
 import { SubmitHandler } from 'react-hook-form';
 import { useCallback } from 'react';
-import { signInSchema } from '../../schemas/signIn';
-import { useUserContext } from '../../hooks/useUserContext';
-import { SignInParams } from '../../context/userContext';
-import { useFormResolver } from '../../hooks/useFormResolver';
-import { useToast } from '../../hooks/useToast';
-import { FormControl } from '@chakra-ui/react';
+import { signInSchema } from '../../../schemas/signIn';
+import { useUserContext } from '../../../hooks/useUserContext';
+import { SignInParams } from '../../../context/userContext';
+import { useFormResolver } from '../../../hooks/useFormResolver';
+import { useToast } from '../../../hooks/useToast';
+import { FormControl, Input as ChakraInput } from '@chakra-ui/react';
 
-export const SignForm = () => {
+export const SignInForm = () => {
   const { signIn } = useUserContext();
   const { openToast } = useToast();
 

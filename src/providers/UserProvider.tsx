@@ -1,10 +1,11 @@
 import { SignInParams, SignUpParams, User, UserContext } from '../context/userContext';
 import { FC, useCallback, useState } from 'react';
-
+import useSWR from 'swr';
 export const UserProvider: FC = ({ children }) => {
   const [state, setState] = useState<User>({
     id: 0,
     email: '',
+    cellphone: '',
     name: '',
   });
 

@@ -5,9 +5,13 @@ export interface User {
   id: number;
   email: string;
   name: string;
+  cellphone: string;
 }
 
-export type SignUpParams = Omit<User, 'id'>;
+export interface SignUpParams extends Omit<User, 'id' | 'name'> {
+  password: string;
+  confirmPassword: string;
+}
 
 export interface SignInParams {
   email: string;
