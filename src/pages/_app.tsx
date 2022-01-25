@@ -1,11 +1,17 @@
 import '../styles/globals.css';
 import { Providers } from '../providers';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Providers>
-      <Component {...pageProps} />
-    </Providers>
+    <>
+      <Head>
+        <title>Text</title>
+      </Head>
+      <Providers>
+        <Component {...pageProps} />
+      </Providers>
+    </>
   );
 }
 

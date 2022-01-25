@@ -1,15 +1,26 @@
-import React, { FC, useCallback, useEffect } from 'react';
-import { api } from '../services/api';
 import { SignUpParams, User } from '../context/userContext';
-import { AxiosResponse } from 'axios';
 import AbstractRepository from './AbstractRepository';
 
 class UserRepository extends AbstractRepository {
   create(data: SignUpParams) {
     return this.api.post<User>('users', data);
   }
-  findAll() {
-    return this.api.get<User[]>('users');
+  async findAll() {
+    try {
+      const response = await this.api.get<User[]>('users');
+
+      return {
+        data: response.data,
+        error: false,
+        response: { ...response },
+      };
+    } catch (e) {
+      return {
+        error: true,
+        data: [],
+        response: { ...e },
+      };
+    }
   }
 }
 export default new UserRepository();
