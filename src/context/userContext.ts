@@ -1,4 +1,5 @@
 import React from 'react';
+import { RoutesEnum } from '../constants/routes';
 
 // TODO ver onde colocar essas interface
 export interface User {
@@ -22,7 +23,7 @@ interface UserContext {
   user: User;
   setUser: (user: Partial<User>) => void;
   signIn: (values: SignInParams) => Promise<void>;
-  signUp: (values: SignUpParams) => Promise<void>;
+  signUp: (values: SignUpParams, pushTo: RoutesEnum) => Promise<void>;
   logOut: () => void;
 }
 

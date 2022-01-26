@@ -1,23 +1,28 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Input } from '../../atoms/input';
 import { signUpSchema } from '../../../schemas/signUp';
 import { SignUpParams } from '../../../context/userContext';
 import { Button } from '../../atoms/button';
-import { SubmitHandler } from 'react-hook-form';
 import { useFormResolver } from '../../../hooks/useFormResolver';
 import { Form } from '../../atoms/form';
+import { useUserContext } from '../../../hooks/useUserContext';
+import { RoutesEnum } from '../../../constants/routes';
 
 export const SignUpForm: FC = () => {
+  const { signUp, user } = useUserContext();
   const {
     handleSubmit,
     control,
-    formState: { isValid },
+    formState: { isValid, isSubmitting },
   } = useFormResolver<SignUpParams>(signUpSchema);
 
-  const onSubmit: SubmitHandler<SignUpParams> = useCallback((data) => {}, []);
-
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} gap={3} flexDir={'column'}>
+    <Form
+      onSubmit={handleSubmit((values) => signUp(values, RoutesEnum.Home))}
+      gap={3}
+      flexDir={'column'}
+    >
+      {user.name}
       <Input control={control} name={'email'} label={'E-mail'} type={'email'} />
       <Input
         control={control}
@@ -36,7 +41,7 @@ export const SignUpForm: FC = () => {
         label={'Confirmar Senha'}
       />
 
-      <Button disabled={!isValid} type={'submit'}>
+      <Button disabled={!isValid} type={'submit'} isLoading={isSubmitting}>
         Cadastrar
       </Button>
     </Form>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import CookieSingleton from '../utils/CookieSingleton';
+import CookiesHandler, { CookiesEnum } from '../utils/CookiesHandler';
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -8,7 +8,9 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = `Bearer ${CookieSingleton.token}`;
+    config.headers.Authorization = `Bearer ${CookiesHandler.getCookie(
+      CookiesEnum.AuthorizationToken
+    )}`;
     return config;
   },
   (error) => {
