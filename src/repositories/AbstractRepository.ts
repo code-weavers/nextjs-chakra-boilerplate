@@ -26,14 +26,12 @@ class AbstractRepository {
   }: MakeRequestParams &
     (T extends void ? 'You must provide a type parameter' : MakeRequestParams)) {
     try {
-      console.log(this.api);
       const response = await this.api({
         method,
         url,
         params,
         data,
       });
-      console.log(response);
 
       return {
         error: false,
@@ -42,7 +40,6 @@ class AbstractRepository {
         status: response.status,
       };
     } catch ({ response = {}, message }) {
-      console.log(message);
       return {
         error: true,
         data: defaultValue as T,

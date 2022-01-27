@@ -2,7 +2,6 @@ import { GetServerSideProps, NextPage } from 'next';
 import UserRepository from '../repositories/UserRepository';
 import { User } from '../context/userContext';
 import { Flex, Text } from '@chakra-ui/react';
-import { useUserContext } from '../hooks/useUserContext';
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { data, error, message } = await UserRepository.findAll();
