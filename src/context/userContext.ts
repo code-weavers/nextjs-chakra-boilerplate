@@ -18,11 +18,14 @@ export interface SignInParams {
   email: string;
   password: string;
 }
+interface SignInResponse {
+  message: string;
+}
 
 interface UserContext {
   user: User;
   setUser: (user: Partial<User>) => void;
-  signIn: (values: SignInParams) => Promise<void>;
+  signIn: (values: SignInParams) => Promise<SignInResponse>;
   signUp: (values: SignUpParams, pushTo: RoutesEnum) => Promise<void>;
   logOut: () => void;
 }

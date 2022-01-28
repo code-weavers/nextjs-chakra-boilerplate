@@ -1,34 +1,32 @@
 import { Input } from '../../atoms/input';
 import { Button } from '../../atoms/button';
 import { SubmitHandler } from 'react-hook-form';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { signInSchema } from '../../../schemas/signIn';
 import { useUserContext } from '../../../hooks/useUserContext';
 import { SignInParams } from '../../../context/userContext';
 import { useFormResolver } from '../../../hooks/useFormResolver';
-import { useToast } from '../../../hooks/useToast';
-import { FormControl, Input as ChakraInput } from '@chakra-ui/react';
+import { Form } from '../../atoms/form';
+import { Flex, Icon, Text } from '@chakra-ui/react';
+import { MdOutlineWarning } from 'react-icons/md';
 
 export const SignInForm = () => {
   const { signIn } = useUserContext();
-  const { openToast } = useToast();
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useFormResolver<SignInParams>(signInSchema);
+  const { control, handleSubmit } = useFormResolver<SignInParams>(signInSchema);
 
   const onSubmit: SubmitHandler<SignInParams> = useCallback(
     async (data) => {
-      openToast();
-      await signIn(data);
+      console.log(data);
+      const { message } = await signIn(data);
+      setErrorMessage(message);
     },
-    [signIn, openToast]
+    [signIn]
   );
 
   return (
-    <FormControl
+    <Form
       minW={'sm'}
       w={'fit-content'}
       display={'flex'}
@@ -36,18 +34,26 @@ export const SignInForm = () => {
       gap={3}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Input type={'email'} label={'E-mail'} errors={errors.email} register={register('email')} />
+      <Input type={'email'} label={'E-mail'} name={'email'} control={control} />
 
-      <Input
-        type={'password'}
-        label={'Senha'}
-        errors={errors.password}
-        register={register('password')}
-      />
+      <Input type={'password'} label={'Senha'} name={'password'} control={control} />
 
-      <Button buttonProps={{ w: 'fit-content' }} type={'submit'}>
-        Cadastrar
+      {errorMessage && (
+        <Flex
+          p={4}
+          bgColor={'red.100'}
+          alignItems={'center'}
+          borderRadius={'md'}
+          textColor={'red.500'}
+        >
+          <Icon as={MdOutlineWarning} color={'red.500'} mr={2} />
+          <Text>{errorMessage}</Text>
+        </Flex>
+      )}
+
+      <Button w={'fit-content'} type={'submit'}>
+        Entrar
       </Button>
-    </FormControl>
+    </Form>
   );
 };
