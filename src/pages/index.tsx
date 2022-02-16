@@ -26,6 +26,7 @@ const Home: NextPage<Home> = ({ users, error }) => {
               <Text>{user.name}</Text>
               <Text>{user.email}</Text>
               <Text>{user.cellphone}</Text>
+
             </Flex>
           ))
         )}
