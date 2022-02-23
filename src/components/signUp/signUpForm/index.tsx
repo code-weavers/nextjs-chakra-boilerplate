@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Input } from '../../atoms/input';
 import { signUpSchema } from '../../../schemas/signUp';
 import { SignUpParams } from '../../../context/userContext';
-import { Button } from '../../atoms/button';
 import { useFormResolver } from '../../../hooks/useFormResolver';
 import { Form } from '../../atoms/form';
 import { useUserContext } from '../../../hooks/useUserContext';
 import { RoutesEnum } from '../../../constants/routes';
+import { Button } from '@chakra-ui/react';
 
 export const SignUpForm: FC = () => {
   const { signUp, user } = useUserContext();

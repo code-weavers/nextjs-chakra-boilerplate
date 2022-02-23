@@ -1,10 +1,9 @@
-import { Center, Container, Flex, Text } from '@chakra-ui/react';
+import { Center, Container, Flex, Text, Button } from '@chakra-ui/react';
 import { useUserContext } from '../../hooks/useUserContext';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useModal } from '../../hooks/useModal';
-import { Button } from '../../components/atoms/button';
 import { useCallback, useMemo } from 'react';
 import { useConfirmModal } from '../../hooks/useConfirmModal';
 import { RoutesEnum } from '../../constants/routes';

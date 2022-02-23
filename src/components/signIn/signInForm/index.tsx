@@ -1,5 +1,4 @@
 import { Input } from '../../atoms/input';
-import { Button } from '../../atoms/button';
 import { SubmitHandler } from 'react-hook-form';
 import { useCallback, useState } from 'react';
 import { signInSchema } from '../../../schemas/signIn';
@@ -7,7 +6,7 @@ import { useUserContext } from '../../../hooks/useUserContext';
 import { SignInParams } from '../../../context/userContext';
 import { useFormResolver } from '../../../hooks/useFormResolver';
 import { Form } from '../../atoms/form';
-import { Flex, Icon, Text } from '@chakra-ui/react';
+import { Flex, Icon, Text, Button } from '@chakra-ui/react';
 import { MdOutlineWarning } from 'react-icons/md';
 
 export const SignInForm = () => {
@@ -18,7 +17,6 @@ export const SignInForm = () => {
 
   const onSubmit: SubmitHandler<SignInParams> = useCallback(
     async (data) => {
-      console.log(data);
       const { message } = await signIn(data);
       setErrorMessage(message);
     },
